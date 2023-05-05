@@ -1,7 +1,10 @@
 package com.iftm.client.resources;
 
 import java.net.URI;
+import java.util.List;
 
+import com.iftm.client.entities.Client;
+import com.iftm.client.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -53,7 +56,7 @@ public class ClientResource {
 				.buildAndExpand(dto.getId()).toUri();
 		return ResponseEntity.created(uri).body(dto);
 	}
-	
+
 	@PutMapping(value = "/{id}")
 	public ResponseEntity<ClientDTO> update(@PathVariable Long id, @RequestBody ClientDTO dto) {
 		dto = service.update(id, dto);
@@ -65,4 +68,9 @@ public class ClientResource {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+
+	/*@GetMapping("/buscarPorNome/{nome}")
+	public List<Client> buscarPorNome(@PathVariable String nome) {
+		return ClientRepository.buscarPorNome(nome);
+	}*/
 }
